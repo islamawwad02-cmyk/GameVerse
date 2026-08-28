@@ -97,41 +97,74 @@ const gameData = [
 // 2. Display Games using JavaScript
 // ==========================================
 
+// ==========================================
+// 2. Load Games from JSON using Fetch API
+// ==========================================
+
 const gamesContainer = document.querySelector(".games-container");
 
-if (gamesContainer) {
+async function loadGames() {
 
-    gamesContainer.innerHTML = "";
+    if (!gamesContainer) {
+        return;
+    }
 
-    gameData.forEach(function (game) {
+    gamesContainer.innerHTML = "<p>Loading games...</p>";
 
-        const gameCard = document.createElement("div");
+    try {
 
-        gameCard.className = "game-card game";
+        const response = await fetch("data/games.json");
 
-        gameCard.innerHTML = `
+        if (!response.ok) {
+            throw new Error("HTTP error: " + response.status);
+        }
 
-            <img src="${game.image}" alt="${game.name}">
+        const games = await response.json();
 
-            <h3>${game.name}</h3>
+        gamesContainer.innerHTML = "";
 
-            <p>
-                ${game.description}
-            </p>
+        games.forEach(function (game) {
 
-            <a href="${game.link}"
-               target="_blank"
-               class="btn">
-                View Game
-            </a>
+            const gameCard = document.createElement("div");
 
-        `;
+            gameCard.className = "game-card game";
 
-        gamesContainer.appendChild(gameCard);
+            gameCard.innerHTML = `
 
-    });
+                <img src="${game.image}" alt="${game.name}">
+
+                <h3>${game.name}</h3>
+
+                <p>
+                    ${game.description}
+                </p>
+
+                <a href="${game.link}"
+                   target="_blank"
+                   class="btn">
+                    View Game
+                </a>
+
+            `;
+
+            gamesContainer.appendChild(gameCard);
+
+        });
+
+    } catch (error) {
+
+        gamesContainer.innerHTML =
+            "<p>Error loading games.</p>";
+
+        console.error("Error loading games:", error);
+
+    }
 
 }
+
+loadGames();
+
+
 
 
 // ==========================================
