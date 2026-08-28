@@ -7,12 +7,12 @@
 
 body{
     background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
-    color:white;
+    color:rgb(249, 245, 245);
     font-family:'Poppins',sans-serif;
 }
 
 header{
-    background:#111827;
+    background:#19243c;
     padding:20px 60px;
 }
 
@@ -23,7 +23,7 @@ nav{
 }
 
 .logo h1{
-    color:#38bdf8;
+    color:#47bef2;
     font-size:32px;
 }
 
@@ -41,7 +41,7 @@ nav ul li a{
 }
 
 nav ul li a:hover{
-    color:#38bdf8;
+    color:#3abcf3;
 }
 .hero{
 
@@ -101,7 +101,7 @@ z-index:2;
 
 .btn{
     display:inline-block;
-    background:#38bdf8;
+    background:#37b3e8;
     color:white;
     text-decoration:none;
     padding:15px 40px;
@@ -131,7 +131,7 @@ z-index:2;
 }
 
 .game-card{
-    background:#1e293b;
+    background:#1a273a;
     border-radius:15px;
     overflow:hidden;
     transition:.4s;
