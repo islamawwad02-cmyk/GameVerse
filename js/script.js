@@ -125,3 +125,33 @@ current = 0;
 hero.style.backgroundImage = `url(${backgrounds[current]})`;
 
 },4000);
+
+// ===============================
+// GameVerse Games Data
+// ===============================
+
+const gameData = [
+    {
+        name: "GTA 6",
+        genre: "Action",
+        platform: "PC / PlayStation / Xbox"
+    },
+
+    {
+        name: "Elden Ring",
+        genre: "Action RPG",
+        platform: "PC / PlayStation / Xbox"
+    },
+
+    {
+        name: "Cyberpunk 2077",
+        genre: "RPG",
+        platform: "PC / PlayStation / Xbox"
+    },
+
+    {
+        name: "FC 26",
+        genre: "Sports",
+        platform: "PC / PlayStation / Xbox"
+    }
+];
