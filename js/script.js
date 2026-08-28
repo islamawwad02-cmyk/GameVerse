@@ -4,93 +4,67 @@
 
 
 // ==========================================
-// 1. Games Data - Array + Objects
+// Load Games from JSON
 // ==========================================
 
-const gameData = [
+const gamesContainer = document.querySelector(".games-container");
 
-    {
-        name: "Grand Theft Auto VI",
-        genre: "Action / Open World",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/gta6.jpg",
-        description: "Explore Vice City in the most anticipated open-world game.",
-        link: "https://www.rockstargames.com/VI"
-    },
+async function loadGames() {
 
-    {
-        name: "Elden Ring",
-        genre: "Action RPG",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/eldenring.jpg",
-        description: "A fantasy action RPG full of adventures and powerful bosses.",
-        link: "https://en.bandainamcoent.eu/elden-ring/elden-ring"
-    },
-
-    {
-        name: "Call of Duty",
-        genre: "First-Person Shooter",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/cod.jpg",
-        description: "Experience intense multiplayer battles and realistic combat.",
-        link: "https://www.callofduty.com/"
-    },
-
-    {
-        name: "Resident Evil 9",
-        genre: "Survival Horror",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/re7.jpg",
-        description: "Enter the terrifying Baker family mansion and survive a true survival horror experience.",
-        link: "https://www.residentevil.com/7/"
-    },
-
-    {
-        name: "Rocket League",
-        genre: "Sports",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/rocketleague.jpg",
-        description: "Drive, jump, and score amazing goals in this fast-paced soccer game.",
-        link: "https://www.rocketleague.com/"
-    },
-
-    {
-        name: "EA FC 26",
-        genre: "Sports",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/fc26.jpg",
-        description: "Experience realistic football with new players, clubs, and competitions.",
-        link: "https://www.ea.com/games/ea-sports-fc"
-    },
-
-    {
-        name: "Valorant",
-        genre: "Tactical Shooter",
-        platform: "PC",
-        image: "images/valorant.jpg",
-        description: "Play tactical 5v5 matches using unique agents and powerful abilities.",
-        link: "https://playvalorant.com/"
-    },
-
-    {
-        name: "Cyberpunk 2077",
-        genre: "Action RPG",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/cyberpunk.jpg",
-        description: "Explore the futuristic Night City and shape your own adventure.",
-        link: "https://www.cyberpunk.net/"
-    },
-
-    {
-        name: "Red Dead Redemption 2",
-        genre: "Action / Adventure",
-        platform: "PC / PlayStation / Xbox",
-        image: "images/rdr2.jpg",
-        description: "Ride across the Wild West and experience an unforgettable story.",
-        link: "https://www.rockstargames.com/reddeadredemption2"
+    if (!gamesContainer) {
+        return;
     }
 
-];
+    gamesContainer.innerHTML = "<p>Loading games...</p>";
+
+    try {
+
+        const response = await fetch("data/games.json");
+
+        if (!response.ok) {
+            throw new Error("HTTP error: " + response.status);
+        }
+
+        const games = await response.json();
+
+        gamesContainer.innerHTML = "";
+
+        games.forEach(function (game) {
+
+            const gameCard = document.createElement("div");
+
+            gameCard.className = "game-card game";
+
+            gameCard.innerHTML = `
+                <img src="${game.image}" alt="${game.name}">
+
+                <h3>${game.name}</h3>
+
+                <p>${game.description}</p>
+
+                <a href="${game.link}"
+                   target="_blank"
+                   class="btn">
+                    View Game
+                </a>
+            `;
+
+            gamesContainer.appendChild(gameCard);
+
+        });
+
+    } catch (error) {
+
+        console.error("Error loading games:", error);
+
+        gamesContainer.innerHTML =
+            "<p>Error loading games.</p>";
+
+    }
+
+}
+
+loadGames();
 
 
 // ==========================================
@@ -168,7 +142,7 @@ loadGames();
 
 
 // ==========================================
-// 3. Search Games
+// Search Games
 // ==========================================
 
 const searchBox = document.getElementById("searchBox");
